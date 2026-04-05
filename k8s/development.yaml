@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: github-action-argocd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: github-action-argocd
+  template:
+    metadata:
+      labels:
+        app: github-action-argocd
+    spec:
+      containers:
+        - name: github-action-argocd
+          image: localhost:5000/github-action-argocd:latest
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: github-action-argocd
+spec:
+  type: NodePort
+  selector:
+    app: github-action-argocd
+  ports:
+    - port: 80
+      targetPort: 8080
+      nodePort: 9091

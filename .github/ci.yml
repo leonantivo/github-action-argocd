@@ -1,0 +1,23 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build JAR
+        run: mvn clean package
+
+      - name: Build Docker image
+        run: docker build -t localhost:5000/github-action-argocd:latest .
+
+      - name: Push Docker image
+        run: docker push localhost:5000/github-action-argocd:latest

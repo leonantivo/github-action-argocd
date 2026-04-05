@@ -16,7 +16,7 @@ spec:
         - name: github-action-argocd
           image: localhost:5000/github-action-argocd:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 9091
 ---
 apiVersion: v1
 kind: Service
@@ -28,5 +28,5 @@ spec:
     app: github-action-argocd
   ports:
     - port: 80
-      targetPort: 8080
+      targetPort: 9091
       nodePort: 9091

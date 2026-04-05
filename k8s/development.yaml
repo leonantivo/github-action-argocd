@@ -16,7 +16,7 @@ spec:
         - name: github-action-argocd
           image: localhost:5000/github-action-argocd:latest
           ports:
-            - containerPort: 9091
+            - containerPort: 9091 # The port your app listens on inside the container
 ---
 apiVersion: v1
 kind: Service
@@ -27,6 +27,6 @@ spec:
   selector:
     app: github-action-argocd
   ports:
-    - port: 80
-      targetPort: 9091
-      nodePort: 9091
+    - port: 80          # The port used to access the service inside the cluster
+      targetPort: 9091  # Routes to the containerPort defined above
+      nodePort: 30091   # External port on the Node (Must be 30000-32767)

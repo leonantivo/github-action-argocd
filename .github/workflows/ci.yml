@@ -29,6 +29,11 @@ jobs:
       - name: Build JAR
         run: mvn clean package -DskipTests
 
+      - name: Configure Docker
+        run: |
+          mkdir -p ~/.docker
+          echo '{}' > ~/.docker/config.json
+
       - name: Build Docker image
         run: docker build -t localhost:5000/github-action-argocd:latest .
 

@@ -30,7 +30,7 @@ jobs:
         run: mvn clean package -DskipTests
 
       - name: Build Docker image
-        run: docker build -t host.docker.internal:5000/github-action-argocd:latest .
+        run: docker build -t localhost:5000/github-action-argocd:latest .
 
       - name: Push Docker image
-        run: docker push host.docker.internal:5000/github-action-argocd:latest
+        run: docker push localhost:5000/github-action-argocd:latest
